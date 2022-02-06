@@ -69,18 +69,138 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
+Movie.destroy_all
+Person.destroy_all
+Role.destroy_all
 
 # Generate models and tables, according to the domain model
 # TODO!
+
+#done via db: migrate > replicated schema from hw1-solution.sql
 
 # Insert data into your database that reflects the sample data shown above
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
+#creates movies data:
+movie = Movie.new
+movie.title = "Batman Begins"
+movie.year_released = 2005
+movie.rating = "PG-13"
+movie.save
+
+movie = Movie.new
+movie.title = "The Dark Knight"
+movie.year_released = 2008
+movie.rating = "PG-13"
+movie.save
+
+movie = Movie.new
+movie.title = "The Dark Knight Rises"
+movie.year_released = 2013
+movie.rating = "PG-13"
+movie.save
+
+#creates people data:
+person = Person.new
+person.name = "Christian Bale"
+person.save
+
+person = Person.new
+person.name = "Michael Caine"
+person.save
+
+person = Person.new
+person.name = "Liam Neeson"
+person.save
+
+person = Person.new
+person.name = "Katie Holmes"
+person.save
+
+person = Person.new
+person.name = "Gary Oldman"
+person.save
+
+person = Person.new
+person.name = "Heath Ledger"
+person.save
+
+person = Person.new 
+person.name = "Aaron Eckhart"
+person.save
+
+person = Person.new
+person.name = "Maggie Gyllenhaal"
+person.save
+
+person = Person.new
+person.name = "Tom Hardy"
+person.save
+
+person = Person.new
+person.name = "Joseph Gordon-Levitt"
+person.save
+
+person = Person.new
+person.name = "Anne Hathaway"
+person.save
+
+person = Person.new
+person.name = "Christopher Nolan"
+person.save
+
+#creates role data:
+role = Role.new
+role.role_name = "Bruce Wayne"
+role.save
+
+role = Role.new
+role.role_name = "Alfred"
+role.save
+
+role = Role.new
+role.role_name = "Ra's Al Ghul"
+role.save
+
+role = Role.new
+role.role_name = "Rachel Dawes"
+role.save
+
+role = Role.new
+role.role_name = "Commissioner Gordon"
+role.save
+
+role = Role.new
+role.role_name = "Joker"
+role.save
+
+role = Role.new
+role.role_name = "Harvey Dent"
+role.save
+
+role = Role.new
+role.role_name = "Bane"
+role.save
+
+role = Role.new
+role.role_name = "John Blake"
+role.save
+
+role = Role.new
+role.role_name = "Selina Kyle"
+role.save
+
+role = Role.new
+role.role_name = "Director"
+role.save
+
+movie.person_id = person.id
+
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
-puts ""
+puts Movie.all.inspect
 
 # Query the movies data and loop through the results to display the movies output
 # TODO!
