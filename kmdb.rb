@@ -82,25 +82,6 @@ Role.destroy_all
 # Do not use hard-coded foreign key IDs.
 # TODO!
 
-#creates movies data:
-movie = Movie.new
-movie.title = "Batman Begins"
-movie.year_released = 2005
-movie.rating = "PG-13"
-movie.save
-
-movie = Movie.new
-movie.title = "The Dark Knight"
-movie.year_released = 2008
-movie.rating = "PG-13"
-movie.save
-
-movie = Movie.new
-movie.title = "The Dark Knight Rises"
-movie.year_released = 2013
-movie.rating = "PG-13"
-movie.save
-
 #creates people data:
 person = Person.new
 person.name = "Christian Bale"
@@ -195,15 +176,48 @@ role = Role.new
 role.role_name = "Director"
 role.save
 
-movie.person_id = person.id
+#creates movies data:
+director = Person.where({ name: "Christopher Nolan"})[0]
+
+movie = Movie.new
+movie.title = "Batman Begins"
+movie.year_released = 2005
+movie.rating = "PG-13"
+movie.person_id = director.id
+movie.save
+
+movie = Movie.new
+movie.title = "The Dark Knight"
+movie.year_released = 2008
+movie.rating = "PG-13"
+movie.person_id = director.id
+movie.save
+
+movie = Movie.new
+movie.title = "The Dark Knight Rises"
+movie.year_released = 2013
+movie.rating = "PG-13"
+movie.person_id = director.id
+movie.save
+
+
 
 # Prints a header for the movies output
 puts "Movies"
 puts "======"
-puts Movie.all.inspect
 
 # Query the movies data and loop through the results to display the movies output
 # TODO!
+
+all_movies = Movie.all
+directors = Person.where({ id: movie.person_id})
+
+for movie in all_movies
+     puts " #{movie.title} #{movie.year_released} #{movie.rating}"
+     for director in directors
+        puts " #{director.name}"
+     end
+end
 
 # Prints a header for the cast output
 puts ""
