@@ -131,51 +131,6 @@ person = Person.new
 person.name = "Christopher Nolan"
 person.save
 
-#creates role data:
-role = Role.new
-role.role_name = "Bruce Wayne"
-role.save
-
-role = Role.new
-role.role_name = "Alfred"
-role.save
-
-role = Role.new
-role.role_name = "Ra's Al Ghul"
-role.save
-
-role = Role.new
-role.role_name = "Rachel Dawes"
-role.save
-
-role = Role.new
-role.role_name = "Commissioner Gordon"
-role.save
-
-role = Role.new
-role.role_name = "Joker"
-role.save
-
-role = Role.new
-role.role_name = "Harvey Dent"
-role.save
-
-role = Role.new
-role.role_name = "Bane"
-role.save
-
-role = Role.new
-role.role_name = "John Blake"
-role.save
-
-role = Role.new
-role.role_name = "Selina Kyle"
-role.save
-
-role = Role.new
-role.role_name = "Director"
-role.save
-
 #creates movies data:
 director = Person.where({ name: "Christopher Nolan"})[0]
 
@@ -200,7 +155,130 @@ movie.rating = "PG-13"
 movie.person_id = director.id
 movie.save
 
+#creates role data for Batman Begins 
+batman_begins = Movie.where({ title: "Batman Begins"})[0]
+bb_id = batman_begins.id
 
+bale = Person.where({ name: "Christian Bale"})[0]
+caine = Person.where({ name: "Michael Caine"})[0]
+neeson = Person.where({ name: "Liam Neeson"})[0]
+holmes = Person.where({ name: "Katie Holmes"})[0]
+oldman = Person.where({ name: "Gary Oldman"})[0]
+nolan = Person.where({ name: "Christopher Nolan"})[0]
+
+role = Role.new
+role.role_name = "Bruce Wayne"
+role.person_id = bale.id
+role.movie_id = bb_id
+role.save
+
+role = Role.new
+role.role_name = "Alfred"
+role.person_id = caine.id
+role.movie_id = bb_id
+role.save
+
+role = Role.new
+role.role_name = "Ra's Al Ghul"
+role.person_id = neeson.id
+role.movie_id = bb_id
+role.save
+
+role = Role.new
+role.role_name = "Rachel Dawes"
+role.person_id = holmes.id
+role.movie_id = bb_id
+role.save
+
+role = Role.new
+role.role_name = "Commissioner Gordon"
+role.person_id = oldman.id
+role.movie_id = bb_id
+role.save
+
+
+# creates role data for The Dark Knight 
+
+dark_knight = Movie.where({ title: "The Dark Knight"})[0]
+dk_id = dark_knight.id
+
+ledger = Person.where({ name: "Heath Ledger"})[0]
+eckhart = Person.where({ name: "Aaron Eckhart"})[0]
+gyllenhaal = Person.where({ name: "Maggie Gyllenhaal"})[0]
+
+role = Role.new
+role.role_name = "Bruce Wayne"
+role.person_id = bale.id
+role.movie_id = dk_id
+role.save
+
+role = Role.new
+role.role_name = "Joker"
+role.person_id = ledger.id
+role.movie_id = dk_id
+role.save
+
+role = Role.new
+role.role_name = "Harvey Dent"
+role.person_id = eckhart.id
+role.movie_id = dk_id
+role.save
+
+role = Role.new
+role.role_name = "Alfred"
+role.person_id = caine.id
+role.movie_id = dk_id
+role.save
+
+role = Role.new
+role.role_name = "Rachel Dawes"
+role.person_id = gyllenhaal.id
+role.movie_id = dk_id
+role.save
+
+# creates role data for The Dark Knight Rises
+# The Dark Knight Rises  Christian Bale        Bruce Wayne
+# The Dark Knight Rises  Gary Oldman           Commissioner Gordon
+# The Dark Knight Rises  Tom Hardy             Bane
+# The Dark Knight Rises  Joseph Gordon-Levitt  John Blake
+# The Dark Knight Rises  Anne Hathaway         Selina Kyle
+
+dark_knight_rises = Movie.where({ title: "The Dark Knight Rises"})[0]
+dkr_id = dark_knight_rises.id
+
+hardy = Person.where({ name: "Tom Hardy"})[0]
+levitt = Person.where({ name: "Joseph Gordon-Levitt"})[0]
+hathaway = Person.where({ name: "Anne Hathaway"})[0]
+
+role = Role.new
+role.role_name = "Bruce Wayne"
+role.person_id = bale.id
+role.movie_id = dkr_id
+role.save
+
+role = Role.new
+role.role_name = "Commissioner Gordon"
+role.person_id = oldman.id
+role.movie_id = dkr_id
+role.save
+
+role = Role.new
+role.role_name = "Bane"
+role.person_id = hardy.id
+role.movie_id = dkr_id
+role.save
+
+role = Role.new
+role.role_name = "John Blake"
+role.person_id = levitt.id
+role.movie_id = dkr_id
+role.save
+
+role = Role.new
+role.role_name = "Selina Kyle"
+role.person_id = hathaway.id
+role.movie_id = dkr_id
+role.save
 
 # Prints a header for the movies output
 puts "Movies"
@@ -227,3 +305,12 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie
 # TODO!
+movies = Movie.where({ id: role.movie_id})
+people = Person.where({ id: role.person_id})
+top_cast = Role.all
+
+for cast in top_cast
+    puts "#{movies.title} #{people.name} #{cast.role_name}"
+end
+
+
