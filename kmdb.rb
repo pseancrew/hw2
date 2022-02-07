@@ -288,13 +288,9 @@ puts "======"
 # TODO!
 
 all_movies = Movie.all
-directors = Person.where({ id: movie.person_id})
 
 for movie in all_movies
-     puts " #{movie.title} #{movie.year_released} #{movie.rating}"
-     for director in directors
-        puts " #{director.name}"
-     end
+     puts " #{movie.title} #{movie.year_released} #{movie.rating} #{movie.person.name}"
 end
 
 # Prints a header for the cast output
@@ -305,12 +301,13 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie
 # TODO!
-movies = Movie.where({ id: role.movie_id})
-people = Person.where({ id: role.person_id})
+
 top_cast = Role.all
 
 for cast in top_cast
-    puts "#{movies.title} #{people.name} #{cast.role_name}"
+    puts "#{cast.movie.title} #{cast.person.name} #{cast.role_name}"
 end
+
+
 
 
